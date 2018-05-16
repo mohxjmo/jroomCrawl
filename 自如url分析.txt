@@ -1,0 +1,79 @@
+非地图找房，条件搜索
+1）北京：z1:整租 z2:合租 z3:不限 z6:业主直租 z7:豪宅(只爬取z1、z2类型的房源)
+		 qwd:搜索关键词
+		 p:页码数
+		 合租：东城 8P：http://www.ziroom.com/z/nl/z2-d23008614.html
+			   西城 21P：http://www.ziroom.com/z/nl/z2-d23008626.html
+			   朝阳 r1 0P:
+			        r2 2P:http://www.ziroom.com/z/nl/z2-d23008613-r2.html
+					r3 27P:http://www.ziroom.com/z/nl/z2-d23008613-r3.html
+					r4 28P:http://www.ziroom.com/z/nl/z2-d23008613-r4.html
+					r5 22P:http://www.ziroom.com/z/nl/z2-d23008613-r5.html
+					r6 20P:http://www.ziroom.com/z/nl/z2-d23008613-r6.html
+			   海淀 r1 0P
+				    r2 2P:http://www.ziroom.com/z/nl/z2-d23008618-r2.html
+					r3 7P:http://www.ziroom.com/z/nl/z2-d23008618-r3.html
+					r4 15P:http://www.ziroom.com/z/nl/z2-d23008618-r4.html
+					r5 12P:http://www.ziroom.com/z/nl/z2-d23008618-r5.html
+					r6 17P:http://www.ziroom.com/z/nl/z2-d23008618-r6.html
+			   丰台 46P：http://www.ziroom.com/z/nl/z2-d23008617.html
+			   石景山 11P：http://www.ziroom.com/z/nl/z2-d23008623.html
+			   通州 38P：http://www.ziroom.com/z/nl/z2-d23008625.html
+			   昌平 38P:http://www.ziroom.com/z/nl/z2-d23008611.html
+			   大兴 33P：http://www.ziroom.com/z/nl/z2-d23008615.html
+			   顺义 40P：http://www.ziroom.com/z/nl/z2-d23008624.html
+			   房山 15P：http://www.ziroom.com/z/nl/z2-d23008616.html
+			   门头沟 14P:http://www.ziroom.com/z/nl/z2-d23008620.html
+			   亦庄开发区 7P：http://www.ziroom.com/z/nl/z2-d23008629.html
+		 整租：东城 6P：http://www.ziroom.com/z/nl/z1-d23008614.html
+			   西城 13P：http://www.ziroom.com/z/nl/z1-d23008626.html
+			   朝阳 40P:http://www.ziroom.com/z/nl/z1-d23008613.html
+			   海淀 20P:http://www.ziroom.com/z/nl/z1-d23008618.html
+			   丰台 17P：http://www.ziroom.com/z/nl/z1-d23008617.html
+			   石景山 5P：http://www.ziroom.com/z/nl/z1-d23008623.html
+			   通州 20P：http://www.ziroom.com/z/nl/z1-d23008625.html
+			   昌平 7P:http://www.ziroom.com/z/nl/z1-d23008611.html
+			   大兴 10P：http://www.ziroom.com/z/nl/z1-d23008615.html
+			   顺义 8P：http://www.ziroom.com/z/nl/z1-d23008624.html
+			   房山 1P：http://www.ziroom.com/z/nl/z1-d23008616.html
+			   门头沟 4P:http://www.ziroom.com/z/nl/z1-d23008620.html
+			   亦庄开发区 2P：http://www.ziroom.com/z/nl/z1-d23008629.html
+
+
+数据提取：
+对于合租而言，一个房间一个ID
+1）获取房屋链接:
+反爬：用户代理池
+1万条数据只获取了4000+：UAPOOL、“多条详细url”、DOWNLOAD_DELAY = 0.1
+ xpath:'//a[@class="t1]/@href'.extract()
+ e.g. //www.ziroom.com/z/vr/61013771.html
+	  数字为房屋ID
+<div class="t_newlistbox">
+    <ul id="houseList">
+        <li class="clearfix">  //一个房源信息单位
+            <div class="img pr"> //图片
+                <a target="_blank" href="//www.ziroom.com/z/vr/61013771.html">
+				<img src="//static8.ziroom.com/phoenix/pc/images/list/loading.jpg" _src="//img.ziroom.com/pic/house_images/g2/M00/36/5A/ChAFfVqen5uARv4OAAjPcJRTUHY801.JPG_C_264_198_Q80.jpg" _webpsrc="//img.ziroom.com/pic/house_images/g2/M00/36/5A/ChAFfVqen5uARv4OAAjPcJRTUHY801.JPG_C_264_198_Q80.webp" 
+				alt="珠江拉维小镇" /></a>
+            </div>
+            <div class="txt">  //文字
+                <h3><a target="_blank" href="//www.ziroom.com/z/vr/61013771.html" class="t1">精选 · 珠江拉维小镇2居室-南北</a></h3>
+                <h4><a target="_blank" href="//www.ziroom.com/z/vr/61013771.html">[通州潞苑] </a></h4>
+                <div class="detail">
+                    <p><span>96.14 ㎡</span>|<span>7/7层</span>|<span>2室1厅</span></p>
+                    <p><span></span></p>
+                </div>
+                <p class="room_tags clearfix"><span class="balcony">独立阳台</span><span class="subway">集体供暖</span><span class="style">自如精选 原味</span></p>
+            </div>
+            <div class="priceDetail">  //价格
+                <p class="price">￥ 4990<span class="gray-6">(每月)</span></p>
+                <p class="more"><a href="//www.ziroom.com/z/vr/61013771.html" target="_blank">查看更多</a></p>
+            </div>
+        </li>
+		//18条房源信息...... 
+	</ul>
+    //翻页
+	<div class="pages" id="page">      
+	</div>
+</div>
+2）获取房屋详细信息：
